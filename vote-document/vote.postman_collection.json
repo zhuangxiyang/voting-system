@@ -1,0 +1,391 @@
+{
+	"info": {
+		"_postman_id": "f46a000d-9156-457d-a944-345e59072422",
+		"name": "vote",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "1276451"
+	},
+	"item": [
+		{
+			"name": "登录",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8662/login?username=admin&password=123456",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8662",
+					"path": [
+						"login"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "admin"
+						},
+						{
+							"key": "password",
+							"value": "123456"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "新增投票",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NTY5NDU5ODcsInVzZXJfaW5mbyI6eyJpZCI6MiwidXNlck5hbWUiOiLotoXnuqfnrqHnkIblkZgiLCJzdXBlckFkbWluIjpmYWxzZSwidXNlckNvZGUiOiJhZG1pbiIsImNyZWF0ZURhdGUiOiIyMDIyLTA3LTA0IDE4OjQ2OjI3In0sInVzZXJfbmFtZSI6ImFkbWluIiwianRpIjoiMzU4MTQ4NTktMjZhNS00NzRhLThjMjItZTM4OGM1YmNjYmQ4IiwiY2xpZW50X2lkIjpudWxsLCJzY29wZSI6W119.c4ikB6RnzsLjBlUhqYvPOFiNcmnO9wxb0vuF8NxPMzHgsKHwPM8LBdDgBeuGkROIuRlW-J85h-sDvkeTMyuZn0vYw59f7mx4iSREjZ6pPQpkR9dz8tFWP_Wv5UWd-77t2x_aZQdWjpTaGzF1VyuqphzGNidR15W-6C4beDcKMVWPfLKeo2mgWROS93iQwuMaBd3DHLQ-yb2kfxiWq_McmvzXi5tP2MsShsSs-VvE8WrCMAzmxV1B_TzjPCDrikY8BCwQ8bsIwm1t0fOU8duS16jCebBPZdhEuz5jBHfC9kjLyKL8emVj_nOJ9sYnVu4fKIpg3cGyVj_6Lc1FdD7CewA",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"actName\":\"测试活动1\",\r\n    \"actStartTime\":\"2022-07-03\",\r\n    \"actEndTime\":\"2022-07-05\"\r\n    \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8662/activity/saveActivity",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8662",
+					"path": [
+						"activity",
+						"saveActivity"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "查询投票",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NTY5NDgzOTAsInVzZXJfaW5mbyI6eyJpZCI6MiwidXNlck5hbWUiOiLotoXnuqfnrqHnkIblkZgiLCJzdXBlckFkbWluIjpmYWxzZSwidXNlckNvZGUiOiJhZG1pbiIsImNyZWF0ZURhdGUiOiIyMDIyLTA3LTA0IDE5OjI2OjMwIn0sInVzZXJfbmFtZSI6ImFkbWluIiwianRpIjoiYWY0MWFiODktYjc1Zi00NjZmLWI4YjctZjQ4NWVjOGI4YTA1IiwiY2xpZW50X2lkIjpudWxsLCJzY29wZSI6W119.Yz7wJj4pCdJN2XzPOLBNWwHHYiguhQOD-JLYT-s49QQKnSl8ra20C4sBkvr3BTg2HSsEEUhBUIh61jZ6AGY2ERCAxEzg0EJmADcvk5XkQybrLvrL5Bv1NhvMvGDROd0VprQiqgGwOz8Sp801wxjIXX4_f7c4Yqo4sHiTlAXTDIKEftWNG-hI49sOQ2fDS_SewlC84tmj9JqJyfb6mTKLNOaY22NdoV4NSPv9BsyaNQ9oYPm3eaVpHFg6pws2hjl7Qiy6ebxgiOrYQmFqIvd-Sr8WT-eo85cIFZ4-m9pOJRjtSiDhbTjuSE5fBFD8t2kqEQescbnh1OpIeLU6c12LfQ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"model\":{\r\n\r\n\r\n        \r\n    }\r\n\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8662/activity/getActivityPage",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8662",
+					"path": [
+						"activity",
+						"getActivityPage"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "修改投票",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NTcwNDMzMTEsInVzZXJfaW5mbyI6eyJpZCI6MSwidXNlck5hbWUiOiLotoXnuqfnrqHnkIblkZgiLCJzdXBlckFkbWluIjpmYWxzZSwidXNlckNvZGUiOiJhZG1pbiIsImNyZWF0ZURhdGUiOiIyMDIyLTA3LTA1IDEzOjQ4OjMxIn0sInVzZXJfbmFtZSI6ImFkbWluIiwianRpIjoiNTQwYTY0MmEtMjcxZS00YTIzLTkzNmQtNDhlMGZiOTk0YTY1IiwiY2xpZW50X2lkIjpudWxsLCJzY29wZSI6W119.a45vNpAa_ZRZwTEP0opRxpDDDMKszRGucrjX39Bv6mRx6A7L8IdWaDZY43-ld6o8nOOQH7xI6_TklnSP6za4kWaiztvQAq0HzH1N1JQC0dS8yF50GB5NMFysr6VIE1mB794uAMumtai8EYsGh4S4xaeEWyKtdkpe5tb5CW-kSORPvFC_MqY3UTjxzSsANRYLiIY9CjnTxamQIdRFTWVAsH6MTrC3j2F30ur0dunOwEPU9y8UqXQ4zIwKFpZkvpjqPzmWPgIf3ocxeRlsKVBv_ABJ7t3RpeMGFwA3K5xL6XuyzNVrp0A__ztccUsYJHzdtvDXMUvn6pQTyyGlvjtX0w",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8662/activity/saveActivity",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8662",
+					"path": [
+						"activity",
+						"saveActivity"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "删除投票",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NTY5NDU5ODcsInVzZXJfaW5mbyI6eyJpZCI6MiwidXNlck5hbWUiOiLotoXnuqfnrqHnkIblkZgiLCJzdXBlckFkbWluIjpmYWxzZSwidXNlckNvZGUiOiJhZG1pbiIsImNyZWF0ZURhdGUiOiIyMDIyLTA3LTA0IDE4OjQ2OjI3In0sInVzZXJfbmFtZSI6ImFkbWluIiwianRpIjoiMzU4MTQ4NTktMjZhNS00NzRhLThjMjItZTM4OGM1YmNjYmQ4IiwiY2xpZW50X2lkIjpudWxsLCJzY29wZSI6W119.c4ikB6RnzsLjBlUhqYvPOFiNcmnO9wxb0vuF8NxPMzHgsKHwPM8LBdDgBeuGkROIuRlW-J85h-sDvkeTMyuZn0vYw59f7mx4iSREjZ6pPQpkR9dz8tFWP_Wv5UWd-77t2x_aZQdWjpTaGzF1VyuqphzGNidR15W-6C4beDcKMVWPfLKeo2mgWROS93iQwuMaBd3DHLQ-yb2kfxiWq_McmvzXi5tP2MsShsSs-VvE8WrCMAzmxV1B_TzjPCDrikY8BCwQ8bsIwm1t0fOU8duS16jCebBPZdhEuz5jBHfC9kjLyKL8emVj_nOJ9sYnVu4fKIpg3cGyVj_6Lc1FdD7Cew",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8662/activity/deleteActivity?idList=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8662",
+					"path": [
+						"activity",
+						"deleteActivity"
+					],
+					"query": [
+						{
+							"key": "idList",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "启用投票",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NTY5NDg2NjcsInVzZXJfaW5mbyI6eyJpZCI6MiwidXNlck5hbWUiOiLotoXnuqfnrqHnkIblkZgiLCJzdXBlckFkbWluIjpmYWxzZSwidXNlckNvZGUiOiJhZG1pbiIsImNyZWF0ZURhdGUiOiIyMDIyLTA3LTA0IDE5OjMxOjA3In0sInVzZXJfbmFtZSI6ImFkbWluIiwianRpIjoiNzRiMWM1MDMtMTIxNC00ZjRlLTlmNjQtODhiMDg5MTJkNDg5IiwiY2xpZW50X2lkIjpudWxsLCJzY29wZSI6W119.JUaElQggiKQYTGsZ17dLyIBJG4ZPDTaT_fgf8ad0bvLVBFd40nyazI8aY_Wdr_p4QUIW0CVLid0MOy_Z80tio2RfpKsvh4plC89ONOZSsvbNnCVzgBZO6KvxNrBH-ao5_sM8jKT6fbeiVJVeAXOQ_cZ4rp6mcGE-q1RCB4qabbTzcPnunxmyoYTZJtyeP9a6BXRnocuv8Kd-KbZ3XUbFdGHkCtoZrB9I99EvtPJStLZeeB836oyBDzDfhApGerBKAu9Nlgi2n6Dkbm0dToy_mjWlHdl38k4TfljVwrgJaCaVQUJyakhc-noGf2P4klTMSMsVjj0hwoYmPHVtz5cEuQ",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8662/activity/enableActivity?actNos=ACT220704002",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8662",
+					"path": [
+						"activity",
+						"enableActivity"
+					],
+					"query": [
+						{
+							"key": "actNos",
+							"value": "ACT220704002"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "停用投票",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NTY5NDg2NjcsInVzZXJfaW5mbyI6eyJpZCI6MiwidXNlck5hbWUiOiLotoXnuqfnrqHnkIblkZgiLCJzdXBlckFkbWluIjpmYWxzZSwidXNlckNvZGUiOiJhZG1pbiIsImNyZWF0ZURhdGUiOiIyMDIyLTA3LTA0IDE5OjMxOjA3In0sInVzZXJfbmFtZSI6ImFkbWluIiwianRpIjoiNzRiMWM1MDMtMTIxNC00ZjRlLTlmNjQtODhiMDg5MTJkNDg5IiwiY2xpZW50X2lkIjpudWxsLCJzY29wZSI6W119.JUaElQggiKQYTGsZ17dLyIBJG4ZPDTaT_fgf8ad0bvLVBFd40nyazI8aY_Wdr_p4QUIW0CVLid0MOy_Z80tio2RfpKsvh4plC89ONOZSsvbNnCVzgBZO6KvxNrBH-ao5_sM8jKT6fbeiVJVeAXOQ_cZ4rp6mcGE-q1RCB4qabbTzcPnunxmyoYTZJtyeP9a6BXRnocuv8Kd-KbZ3XUbFdGHkCtoZrB9I99EvtPJStLZeeB836oyBDzDfhApGerBKAu9Nlgi2n6Dkbm0dToy_mjWlHdl38k4TfljVwrgJaCaVQUJyakhc-noGf2P4klTMSMsVjj0hwoYmPHVtz5cEuQ",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8662/activity/stopActivity?actNos=ACT220704002",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8662",
+					"path": [
+						"activity",
+						"stopActivity"
+					],
+					"query": [
+						{
+							"key": "actNos",
+							"value": "ACT220704002"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "结束投票",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NTY5NDg2NjcsInVzZXJfaW5mbyI6eyJpZCI6MiwidXNlck5hbWUiOiLotoXnuqfnrqHnkIblkZgiLCJzdXBlckFkbWluIjpmYWxzZSwidXNlckNvZGUiOiJhZG1pbiIsImNyZWF0ZURhdGUiOiIyMDIyLTA3LTA0IDE5OjMxOjA3In0sInVzZXJfbmFtZSI6ImFkbWluIiwianRpIjoiNzRiMWM1MDMtMTIxNC00ZjRlLTlmNjQtODhiMDg5MTJkNDg5IiwiY2xpZW50X2lkIjpudWxsLCJzY29wZSI6W119.JUaElQggiKQYTGsZ17dLyIBJG4ZPDTaT_fgf8ad0bvLVBFd40nyazI8aY_Wdr_p4QUIW0CVLid0MOy_Z80tio2RfpKsvh4plC89ONOZSsvbNnCVzgBZO6KvxNrBH-ao5_sM8jKT6fbeiVJVeAXOQ_cZ4rp6mcGE-q1RCB4qabbTzcPnunxmyoYTZJtyeP9a6BXRnocuv8Kd-KbZ3XUbFdGHkCtoZrB9I99EvtPJStLZeeB836oyBDzDfhApGerBKAu9Nlgi2n6Dkbm0dToy_mjWlHdl38k4TfljVwrgJaCaVQUJyakhc-noGf2P4klTMSMsVjj0hwoYmPHVtz5cEuQ",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8662/activity/activityOver?actNos=ACT220704002",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8662",
+					"path": [
+						"activity",
+						"activityOver"
+					],
+					"query": [
+						{
+							"key": "actNos",
+							"value": "ACT220704002"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "添加投票候选人",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NTY5NDg2NjcsInVzZXJfaW5mbyI6eyJpZCI6MiwidXNlck5hbWUiOiLotoXnuqfnrqHnkIblkZgiLCJzdXBlckFkbWluIjpmYWxzZSwidXNlckNvZGUiOiJhZG1pbiIsImNyZWF0ZURhdGUiOiIyMDIyLTA3LTA0IDE5OjMxOjA3In0sInVzZXJfbmFtZSI6ImFkbWluIiwianRpIjoiNzRiMWM1MDMtMTIxNC00ZjRlLTlmNjQtODhiMDg5MTJkNDg5IiwiY2xpZW50X2lkIjpudWxsLCJzY29wZSI6W119.JUaElQggiKQYTGsZ17dLyIBJG4ZPDTaT_fgf8ad0bvLVBFd40nyazI8aY_Wdr_p4QUIW0CVLid0MOy_Z80tio2RfpKsvh4plC89ONOZSsvbNnCVzgBZO6KvxNrBH-ao5_sM8jKT6fbeiVJVeAXOQ_cZ4rp6mcGE-q1RCB4qabbTzcPnunxmyoYTZJtyeP9a6BXRnocuv8Kd-KbZ3XUbFdGHkCtoZrB9I99EvtPJStLZeeB836oyBDzDfhApGerBKAu9Nlgi2n6Dkbm0dToy_mjWlHdl38k4TfljVwrgJaCaVQUJyakhc-noGf2P4klTMSMsVjj0hwoYmPHVtz5cEuQ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"actNo\":\"ACT220704002\",\r\n    \"candidateName\":\"候选人2\",\r\n    \"candidateIdCard\":\"A123445(6)\",\r\n    \"candidateMail\":\"liwenbin@huapengfei.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8662/candidateRecord/saveCandidateRecord",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8662",
+					"path": [
+						"candidateRecord",
+						"saveCandidateRecord"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "查看投票实时结果",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\r\n    \"model\":{\r\n        \"actNo\":\"ACT220704002\"\r\n    }\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8662/candidateRecord/getCandidateRecordPage",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8662",
+					"path": [
+						"candidateRecord",
+						"getCandidateRecordPage"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "普通市民投票",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"actNo\":\"ACT220704002\",\r\n    \"candidateIdCard\":\"候选人2\",\r\n    \"candidateName\":\"A123445(6)\",\r\n    \"voterName\":\"liwenbin@huapengfei.com\",\r\n    \"voterIdCard\":\"A122436(5)\",\r\n    \"voterMail\":\"liwenbin@huapengfei.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8662/votingRecord/saveVotingRecord",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8662",
+					"path": [
+						"votingRecord",
+						"saveVotingRecord"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "投票详情",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NTY5NDg2NjcsInVzZXJfaW5mbyI6eyJpZCI6MiwidXNlck5hbWUiOiLotoXnuqfnrqHnkIblkZgiLCJzdXBlckFkbWluIjpmYWxzZSwidXNlckNvZGUiOiJhZG1pbiIsImNyZWF0ZURhdGUiOiIyMDIyLTA3LTA0IDE5OjMxOjA3In0sInVzZXJfbmFtZSI6ImFkbWluIiwianRpIjoiNzRiMWM1MDMtMTIxNC00ZjRlLTlmNjQtODhiMDg5MTJkNDg5IiwiY2xpZW50X2lkIjpudWxsLCJzY29wZSI6W119.JUaElQggiKQYTGsZ17dLyIBJG4ZPDTaT_fgf8ad0bvLVBFd40nyazI8aY_Wdr_p4QUIW0CVLid0MOy_Z80tio2RfpKsvh4plC89ONOZSsvbNnCVzgBZO6KvxNrBH-ao5_sM8jKT6fbeiVJVeAXOQ_cZ4rp6mcGE-q1RCB4qabbTzcPnunxmyoYTZJtyeP9a6BXRnocuv8Kd-KbZ3XUbFdGHkCtoZrB9I99EvtPJStLZeeB836oyBDzDfhApGerBKAu9Nlgi2n6Dkbm0dToy_mjWlHdl38k4TfljVwrgJaCaVQUJyakhc-noGf2P4klTMSMsVjj0hwoYmPHVtz5cEuQ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"actNo\":\"\"\r\n    \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8662/votingRecord/getVotingRecordPage",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8662",
+					"path": [
+						"votingRecord",
+						"getVotingRecordPage"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
