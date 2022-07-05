@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vote.server.dao.VoteUserMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.vote.server.entity.VoteUser">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="create_user" jdbcType="VARCHAR" property="createUser"/>
+        <result column="update_user" jdbcType="VARCHAR" property="updateUser"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="del_flag" jdbcType="TINYINT" property="delFlag"/>
+        <result column="user_name" jdbcType="VARCHAR" property="userName"/>
+        <result column="user_code" jdbcType="VARCHAR" property="userCode"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="telephone" jdbcType="VARCHAR" property="telephone"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="header_url" jdbcType="VARCHAR" property="headerUrl"/>
+        <result column="login_status" jdbcType="TINYINT" property="loginStatus"/>
+        <result column="station_code" jdbcType="VARCHAR" property="stationCode"/>
+        <result column="password_expire_time" jdbcType="TIMESTAMP" property="passwordExpireTime"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id,create_user,update_user,create_time,update_time,del_flag,
+        user_name, user_code, email, telephone, password, header_url, login_status, station_code, password_expire_time
+    </sql>
+
+</mapper>

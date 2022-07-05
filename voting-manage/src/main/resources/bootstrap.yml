@@ -1,0 +1,213 @@
+# redis 通用配置， 不同的环境，需要配置不同的链接信息，只需要将这段信息复制到具体环境的配置文件中进行修改即可
+vote:
+  mail:
+    myEmailAccount: vote-admin@cxd-logistics.com
+    myEmailPassword: LnXY6cAlpemTcxaU
+    myEmailSMTPHost: smtp.qiye.aliyun.com
+  redis:
+    #下面的ip需要改成本地电脑wsl或服务器的ip
+    ip: 172.21.176.1
+    port: 6379
+    password: vote@redis2022
+    database: 0
+# mysql 个性化配置， 不同的环境，需要配置不同的链接信息，只需要将这段信息复制到具体环境的配置文件中进行修改即可
+  mysql:
+    #下面的ip需要改成本地电脑wsl或服务器的ip
+    ip: 172.21.176.1
+    port: 3306
+    driverClassName: com.mysql.cj.jdbc.Driver
+    database: vote_prod_2022
+    username: voteprod
+    password: vote@2022!prod
+    url: jdbc:mysql://${vote.mysql.ip}:${vote.mysql.port}/${vote.mysql.database}?serverTimezone=CTT&characterEncoding=utf8&useUnicode=true&useSSL=false&autoReconnect=true&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&nullCatalogMeansCurrent=true&allowPublicKeyRetrieval=true
+  database:
+    tenantDatabasePrefix: vote_base
+    multiTenantType: NONE
+    isNotWrite: false
+    isBlockAttack: false
+    isSeata: false
+    id-type: CACHE
+    cache-id:
+      time-bits: 31
+      worker-bits: 22
+      seq-bits: 10
+      epochStr: '2020-09-15'
+      boost-power: 3
+      padding-factor: 50
+  auth:
+    server:
+      maxClient: 30000
+      tokenValid: 14400 #默认4小时 token失效
+      force: false
+      startRefresh: false
+      keyPath: classpath:vote.jks
+      alias: vote
+      secret: vote2022pass
+        
+server:
+  port: 8662
+  undertow: # jetty  undertow
+    io-threads: 8 # 设置IO线程数, 它主要执行非阻塞的任务,它们会负责多个连接, 默认设置每个CPU核心一个线程
+    worker-threads: 120  # 阻塞任务线程池, 当执行类似servlet请求阻塞操作, undertow会从这个线程池中取得线程,它的值设置取决于系统的负载
+    buffer-size: 2048  # 以下的配置会影响buffer,这些buffer会用于服务器连接的IO操作,有点类似netty的池化内存管理 , 每块buffer的空间大小,越小的空间被利用越充分
+    direct-buffers: true  # 是否分配的直接内存
+
+logging:
+  config: classpath:logback-vote.xml
+
+spring:
+  application:
+    name: voting-manage
+  jackson:
+    time-zone: Asia/Shanghai
+  http:
+    encoding:
+      charset: UTF-8
+      force: true
+      enabled: true
+  servlet:
+    multipart:
+      max-file-size: 512MB      # Max file size，默认1M
+      max-request-size: 512MB   # Max request size，默认10M
+  cache:
+    type: GENERIC
+  redis:
+    host: ${vote.redis.ip}
+    password: ${vote.redis.password}
+    port: ${vote.redis.port}
+    database: ${vote.redis.database}
+
+
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+  datasource:
+    # 从这里开始(dynamic)，中间的这段配置用于 vote.database.multiTenantType == DATASOURCE 时
+    # 联系群主
+    # 从这里结束(dynamic)，中间的这段配置用于 vote.database.multiTenantType == DATASOURCE 时
+    druid:
+      enable: true
+      # 从这里开始(druid)，中间的这段配置用于 vote.database.multiTenantType != DATASOURCE 时
+      username: ${vote.mysql.username}
+      password: ${vote.mysql.password}
+      driver-class-name: ${vote.mysql.driverClassName}
+      url: jdbc:mysql://${vote.mysql.ip}:${vote.mysql.port}/${vote.mysql.database}?serverTimezone=CTT&characterEncoding=utf8&useUnicode=true&useSSL=false&autoReconnect=true&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&nullCatalogMeansCurrent=true&allowPublicKeyRetrieval=true
+      db-type: mysql
+      initialSize: 10
+      minIdle: 10
+      maxActive: 200
+      max-wait: 60000
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 20
+      validation-query: SELECT 'x'
+      test-on-borrow: false
+      test-on-return: false
+      test-while-idle: true
+      time-between-eviction-runs-millis: 60000  #配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      min-evictable-idle-time-millis: 300000    #配置一个连接在池中最小生存的时间，单位是毫秒
+      filters: stat,wall
+      filter:
+        wall:
+          enabled: true
+          config:
+            commentAllow: true
+            multiStatementAllow: true
+            noneBaseStatementAllow: true
+      # 从这里结束(druid)，中间的这段配置用于 vote.database.multiTenantType != DATASOURCE 时
+
+      # 以下的2段配置，同时适用于所有模式
+      web-stat-filter:  # WebStatFilter配置，说明请参考Druid Wiki，配置_配置WebStatFilter
+        enabled: true
+        url-pattern: /*
+        exclusions: "*.js , *.gif ,*.jpg ,*.png ,*.css ,*.ico , /druid/*"
+        session-stat-max-count: 1000
+        profile-enable: true
+        session-stat-enable: false
+      stat-view-servlet:  #展示Druid的统计信息,StatViewServlet的用途包括：1.提供监控信息展示的html页面2.提供监控信息的JSON API
+        enabled: true
+        url-pattern: /druid/*   #根据配置中的url-pattern来访问内置监控页面，如果是上面的配置，内置监控页面的首页是/druid/index.html例如：http://127.0.0.1:9000/druid/index.html
+        reset-enable: true    #允许清空统计数据
+        login-username: vote
+        login-password: vote
+
+dozer:
+  mappingFiles:
+    - classpath*:dozer/*.dozer.xml
+
+feign:
+  httpclient:
+    enabled: false
+  okhttp:
+    enabled: true
+  hystrix:
+    enabled: true   # feign 熔断机制是否开启
+    #支持压缩的mime types
+  compression:  # 请求压缩
+    request:
+      enabled: true
+      mime-types: text/xml,application/xml,application/json
+      min-request-size: 2048
+    response:  # 响应压缩
+      enabled: true
+
+swagger:
+  enable: true
+
+
+j2cache:
+  #  config-location: /j2cache.properties
+  open-spring-cache: true
+  cache-clean-mode: passive
+  allow-null-values: true
+  redis-client: lettuce
+  l2-cache-open: true
+  # l2-cache-open: false     # 关闭二级缓存
+  broadcast: net.oschina.j2cache.cache.support.redis.SpringRedisPubSubPolicy
+  #  broadcast: jgroups       # 关闭二级缓存
+  L1:
+    provider_class: caffeine
+  L2:
+    provider_class: net.oschina.j2cache.cache.support.redis.SpringRedisProvider
+    config_section: lettuce
+  sync_ttl_to_redis: true
+  default_cache_null_object: false
+  serialization: fst
+caffeine:
+  properties: /j2cache/caffeine.properties   # 这个配置文件需要放在项目中
+lettuce:
+  mode: single
+  namespace: ''
+  storage: generic
+  channel: j2cache
+  scheme: redis
+  hosts: ${vote.redis.ip}:${vote.redis.port}
+  password: ${vote.redis.password}
+  database: ${vote.redis.database}
+  sentinelMasterId: ''
+  maxTotal: 100
+  maxIdle: 10
+  minIdle: 10
+  timeout: 10000
+
+
+
+
+mybatis-plus:
+  mapper-locations:
+    - classpath*:mapper_**/**/*Mapper.xml
+  #实体扫描，多个package用逗号或者分号分隔
+  typeAliasesPackage: com.vote.*.entity;com.vote.mybatis.typehandler
+  typeEnumsPackage: com.vote.*.enumeration
+  global-config:
+    db-config:
+      id-type: INPUT
+      insert-strategy: NOT_NULL
+      update-strategy: NOT_NULL
+      select-strategy: NOT_EMPTY
+  configuration:
+    #配置返回数据库(column下划线命名&&返回java实体是驼峰命名)，自动匹配无需as（没开启这个，SQL需要写as： select user_id as userId）
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+    #配置JdbcTypeForNull, oracle数据库必须配置
+    jdbc-type-for-null: 'null'
+    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
+    logPrefix: m-shop-mybatis-sql.

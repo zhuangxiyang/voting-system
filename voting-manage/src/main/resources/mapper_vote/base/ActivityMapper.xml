@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vote.server.dao.ActivityMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.vote.server.entity.Activity">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="create_user" jdbcType="VARCHAR" property="createUser"/>
+        <result column="update_user" jdbcType="VARCHAR" property="updateUser"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="del_flag" jdbcType="TINYINT" property="delFlag"/>
+        <result column="act_no" jdbcType="VARCHAR" property="actNo"/>
+        <result column="act_name" jdbcType="VARCHAR" property="actName"/>
+        <result column="act_start_time" jdbcType="TIMESTAMP" property="actStartTime"/>
+        <result column="act_end_time" jdbcType="TIMESTAMP" property="actEndTime"/>
+        <result column="act_status" jdbcType="VARCHAR" property="actStatus"/>
+        <result column="winner" jdbcType="VARCHAR" property="winner"/>
+        <result column="winner_num" jdbcType="VARCHAR" property="winnerNum"/>
+        <result column="winner_id_card" jdbcType="VARCHAR" property="winnerIdCard"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id,create_user,update_user,create_time,update_time,del_flag,
+        act_no, act_name, act_start_time, act_end_time, act_status, winner, winner_num, winner_id_card
+    </sql>
+
+</mapper>

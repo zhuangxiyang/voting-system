@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <include resource="com/vote/common/logback/vote-defaults.xml"/>
+
+    <logger name="com.vote" additivity="true" level="${log.level.console}">
+        <appender-ref ref="ASYNC_PROJECT_APPENDER"/>
+    </logger>
+    <logger name="com.vote.server.controller" additivity="true" level="${log.level.controller}">
+        <appender-ref ref="ASYNC_CONTROLLER_APPENDER"/>
+    </logger>
+    <logger name="com.vote.server.service" additivity="true" level="${log.level.service}">
+        <appender-ref ref="ASYNC_SERVICE_APPENDER"/>
+    </logger>
+    <logger name="com.vote.server.dao" additivity="false" level="DEBUG">
+        <appender-ref ref="ASYNC_DAO_APPENDER"/>
+    </logger>
+
+    <root level="INFO">
+        <appender-ref ref="ASYNC_ROOT_APPENDER"/>
+        <appender-ref ref="ASYNC_CONSOLE_APPENDER"/>
+    </root>
+</configuration>

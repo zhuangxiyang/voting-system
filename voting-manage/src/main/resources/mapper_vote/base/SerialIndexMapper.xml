@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vote.server.dao.SerialIndexMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.vote.server.entity.SysSerialIndex">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="create_time" jdbcType="DATE" property="createTime"/>
+        <result column="update_time" jdbcType="DATE" property="updateTime"/>
+        <result column="create_user" jdbcType="VARCHAR" property="createUser"/>
+        <result column="update_user" jdbcType="VARCHAR" property="updateUser"/>
+        <result column="del_flag" jdbcType="TINYINT" property="delFlag"/>
+        <result column="serial_code" jdbcType="VARCHAR" property="serialCode"/>
+        <result column="serial_param" jdbcType="VARCHAR" property="serialParam"/>
+        <result column="serial_date" jdbcType="VARCHAR" property="serialDate"/>
+        <result column="serial_num_count" jdbcType="VARCHAR" property="serialNumCount"/>
+        <result column="serial_index" jdbcType="INTEGER" property="serialIndex"/>
+        <result column="version" jdbcType="INTEGER" property="version"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id,create_time,update_time,create_user,update_user,del_flag,
+        serial_code, serial_param, serial_date, serial_num_count, serial_index, version
+    </sql>
+
+
+    <insert id="insertIgnore">
+        insert ignore into sys_serial_index(create_user, update_user,create_time,update_time,del_flag,
+                                              serial_code, serial_param, serial_date, serial_num_count, serial_index, version)
+            value
+        (#{createUser, jdbcType=VARCHAR}, #{updateUser, jdbcType=VARCHAR}, #{createTime, jdbcType=DATE},
+        #{updateTime, jdbcType=DATE}, #{delFlag, jdbcType=TINYINT}, #{serialCode, jdbcType=VARCHAR},
+        #{serialParam, jdbcType=VARCHAR}, #{serialDate, jdbcType=VARCHAR}, #{serialNumCount, jdbcType=VARCHAR},
+        #{serialIndex, jdbcType=INTEGER}, #{version, jdbcType=INTEGER})
+    </insert>
+
+</mapper>
